@@ -7,21 +7,20 @@
 
 import SwiftUI
 
-enum Segment: String, CaseIterable, Identifiable {
-    case allVideos = "All Videos"
-    case audioFiles = "Audio Files"
-    
-    var id: String { self.rawValue }
-}
-
 struct HomePageView: View {
+    enum Segment: String, CaseIterable, Identifiable {
+        case allVideos = "All Videos"
+        case audioFiles = "Audio Files"
+        
+        var id: String { self.rawValue }
+    }
+    
     @State private var selectedSegment: Segment = .allVideos
+    @State private var showDownloaderView: Bool = false
     let segments: [Segment] = [.allVideos, .audioFiles]
     
-    
-    
     var body: some View {
-        ZStack { 
+        ZStack {
             Color.black.ignoresSafeArea()
             
             
@@ -67,7 +66,7 @@ struct HomePageView: View {
                 HStack {
                     Spacer()
                     Button {
-                        
+                        showDownloaderView = true
                     } label: {
                         ZStack {
                             LinearGradient(colors: [.indigo, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -80,6 +79,11 @@ struct HomePageView: View {
                         .shadow(color: .indigo.opacity(0.5), radius: 15, x: 0, y: 6)
                     }
                     .padding(24)
+                    .sheet(isPresented: $showDownloaderView) {
+                        DownloaderView()
+                            .presentationDetents([.fraction(0.8)])
+                            .presentationDragIndicator(.visible)
+                    }
                 }
             }
         }
