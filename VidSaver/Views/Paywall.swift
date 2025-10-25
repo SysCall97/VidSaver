@@ -39,27 +39,24 @@ struct Paywall: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
                 
-                let rows = [GridItem(.flexible()), GridItem(.flexible())]
-
-                LazyHGrid(rows: rows, spacing: 20) {
+                VStack(alignment: .leading, spacing: 15) {
                     Feature(icon: "arrow.down.circle", text: "Unlimited Downloads")
-                    Feature(icon: "waveform", text: "Audio Extraction")
-                    Feature(icon: "nosign", text: "No Ads")
+                    Feature(icon: "waveform", text: "Unlimited Audio Extraction")
                 }
-                .padding(.horizontal, 24)
                 .padding(.vertical, 32)
+                .padding(.leading, 16)
 
                 
                 Spacer()
                 
                 VStack(spacing: 16) {
-                    PlanOption(title: "Weekly", subtitle: "Billed weekly", price: "$1.99", isSelected: selectedPlan == "Weekly")
+                    PlanOption(title: "Weekly", subtitle: "Billed weekly", price: "$2.99", isSelected: selectedPlan == "Weekly")
                         .onTapGesture { selectedPlan = "Weekly" }
                     
                     PlanOption(title: "Monthly", subtitle: "Billed monthly", price: "$5.99", isSelected: selectedPlan == "Monthly")
                         .onTapGesture { selectedPlan = "Monthly" }
                     
-                    PlanOption(title: "Yearly", subtitle: "Billed annually", price: "$29.99", isSelected: selectedPlan == "Yearly")
+                    PlanOption(title: "Yearly", subtitle: "Billed annually", price: "$25.99", isSelected: selectedPlan == "Yearly")
                         .onTapGesture { selectedPlan = "Yearly" }
                 }
                 .padding(.horizontal, 16)
@@ -86,6 +83,11 @@ struct Paywall: View {
                         .padding(.vertical, 12)
                 }
                 .padding(.bottom, 16)
+                
+                Text("Payment will be charged to your Apple ID account upon confirmation of purchase. Your subscription will automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period.")
+                    .font(.system(size: 12.0))
+                    .foregroundStyle(.white)
+                    .padding()
             }
         }
     }
